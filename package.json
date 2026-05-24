@@ -1,0 +1,13 @@
+{
+  "name": "hx2ids-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hx2 Design — interior design & construction website",
+  "scripts": {
+    "deploy": "wrangler pages deploy . --project-name=hx2ids",
+    "preview": "wrangler pages dev ."
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

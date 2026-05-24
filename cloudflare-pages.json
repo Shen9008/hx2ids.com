@@ -1,0 +1,8 @@
+{
+  "projectName": "hx2ids",
+  "productionBranch": "main",
+  "framework": "static",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "rootDirectory": "/"
+}
