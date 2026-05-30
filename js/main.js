@@ -72,15 +72,16 @@
 
     function initProjects() {
         const grid = document.getElementById('projects-grid');
-        const filters = document.querySelector('.project-filters');
+        const filters = document.querySelector('.project-filters:not(#featured-filters)');
         const featuredGrid = document.getElementById('featured-projects');
+        const featuredFilters = document.getElementById('featured-filters');
         const modal = document.getElementById('project-modal');
 
         if (!grid && !featuredGrid) return;
         if (typeof HX2_PROJECTS === 'undefined') return;
 
         function renderCard(project, index) {
-            const delay = index !== undefined ? ` style="transition-delay:${(index % 6) * 0.08}s"` : '';
+            const delay = index !== undefined ? ` style="transition-delay:${(index % 8) * 0.06}s"` : '';
             return `
                 <article class="project-card fade-up" data-id="${project.id}" data-category="${project.category}"${delay}>
                     <img src="${project.image}" alt="${project.name} — Hx2 Design project" loading="lazy">
@@ -92,10 +93,51 @@
                 </article>`;
         }
 
+        function revealCards(container) {
+            container.querySelectorAll('.fade-up').forEach(el => {
+                if ('IntersectionObserver' in window) {
+                    requestAnimationFrame(() => {
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('visible');
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+                        observer.observe(el);
+                    });
+                } else {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        function renderInto(container, projects) {
+            container.innerHTML = projects.map((p, i) => renderCard(p, i)).join('');
+            bindProjectClicks(container);
+            revealCards(container);
+        }
+
         if (featuredGrid) {
-            const featured = HX2_PROJECTS.slice(0, 6);
-            featuredGrid.innerHTML = featured.map((p, i) => renderCard(p, i)).join('');
-            bindProjectClicks(featuredGrid);
+            function renderFeatured(filter) {
+                const filtered = filter === 'all'
+                    ? HX2_PROJECTS
+                    : HX2_PROJECTS.filter(p => p.category === filter);
+                renderInto(featuredGrid, filtered);
+            }
+
+            if (featuredFilters) {
+                featuredFilters.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.filter-btn');
+                    if (!btn) return;
+                    featuredFilters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderFeatured(btn.dataset.filter);
+                });
+            }
+
+            renderFeatured('all');
         }
 
         if (grid) {
@@ -103,11 +145,7 @@
                 const filtered = filter === 'all'
                     ? HX2_PROJECTS
                     : HX2_PROJECTS.filter(p => p.category === filter);
-                grid.innerHTML = filtered.map((p, i) => renderCard(p, i)).join('');
-                bindProjectClicks(grid);
-                grid.querySelectorAll('.fade-up').forEach(el => {
-                    requestAnimationFrame(() => el.classList.add('visible'));
-                });
+                renderInto(grid, filtered);
             }
 
             if (filters) {
