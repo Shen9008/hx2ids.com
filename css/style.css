@@ -126,13 +126,15 @@ p:last-child { margin-bottom: 0; }
     z-index: 1000;
     height: var(--header-height);
     padding-top: env(safe-area-inset-top, 0);
+    background: rgba(var(--beige-rgb), 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
     transition: background var(--transition), box-shadow var(--transition);
 }
 
 .site-header.scrolled {
-    background: rgba(var(--beige-rgb), 0.96);
-    backdrop-filter: blur(12px);
-    box-shadow: var(--shadow-sm);
+    background: rgba(var(--beige-rgb), 0.98);
+    box-shadow: var(--shadow-md);
 }
 
 .header-inner {
@@ -150,7 +152,7 @@ p:last-child { margin-bottom: 0; }
     font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: 0.04em;
-    color: var(--charcoal);
+    color: #1a1a1a;
 }
 
 .logo-mark {
@@ -170,12 +172,16 @@ p:last-child { margin-bottom: 0; }
 
 .nav-desktop a {
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: #1a1a1a;
     position: relative;
+    transition: color var(--transition);
 }
+
+.logo { transition: color var(--transition); }
+.logo-mark { transition: background var(--transition), color var(--transition), border-color var(--transition); }
 
 .nav-desktop a::after {
     content: '';
@@ -183,13 +189,13 @@ p:last-child { margin-bottom: 0; }
     bottom: -4px;
     left: 0;
     width: 0;
-    height: 1px;
-    background: var(--gold);
+    height: 2px;
+    background: var(--charcoal);
     transition: width var(--transition);
 }
 
 .nav-desktop a:hover,
-.nav-desktop a.active { color: var(--charcoal); }
+.nav-desktop a.active { color: #000000; }
 .nav-desktop a:hover::after,
 .nav-desktop a.active::after { width: 100%; }
 
@@ -202,6 +208,51 @@ p:last-child { margin-bottom: 0; }
 
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: #525252 !important; color: var(--warm-white) !important; }
+
+/* Homepage hero — light header over banner until scroll */
+.page-home .site-header:not(.scrolled) {
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.page-home .site-header:not(.scrolled) .logo {
+    color: #ffffff;
+}
+
+.page-home .site-header:not(.scrolled) .logo-mark {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.page-home .site-header:not(.scrolled) .nav-desktop a:not(.nav-cta) {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.page-home .site-header:not(.scrolled) .nav-desktop a:not(.nav-cta):hover,
+.page-home .site-header:not(.scrolled) .nav-desktop a:not(.nav-cta).active {
+    color: #ffffff;
+}
+
+.page-home .site-header:not(.scrolled) .nav-desktop a:not(.nav-cta)::after {
+    background: #ffffff;
+}
+
+.page-home .site-header:not(.scrolled) .nav-cta {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.55) !important;
+}
+
+.page-home .site-header:not(.scrolled) .nav-cta:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
+.page-home .site-header:not(.scrolled) .menu-toggle span {
+    background: #ffffff;
+}
 
 .menu-toggle {
     display: none;
@@ -222,8 +273,8 @@ p:last-child { margin-bottom: 0; }
     display: block;
     width: 22px;
     height: 2px;
-    background: var(--charcoal);
-    transition: transform var(--transition), opacity var(--transition);
+    background: #1a1a1a;
+    transition: transform var(--transition), opacity var(--transition), background var(--transition);
     transform-origin: center;
 }
 
@@ -256,9 +307,9 @@ p:last-child { margin-bottom: 0; }
     display: flex;
     align-items: center;
     font-size: 1.0625rem;
-    font-weight: 500;
+    font-weight: 600;
     border-bottom: 1px solid var(--border);
-    color: var(--charcoal);
+    color: #1a1a1a;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -987,6 +1038,11 @@ p:last-child { margin-bottom: 0; }
 
     .site-header.scrolled,
     .site-header { background: rgba(var(--beige-rgb), 0.98); box-shadow: var(--shadow-sm); }
+
+    .page-home .site-header:not(.scrolled) {
+        background: transparent;
+        box-shadow: none;
+    }
 
     .logo { font-size: 1.35rem; gap: 0.5rem; }
     .logo-mark { width: 36px; height: 36px; font-size: 0.75rem; }
