@@ -36,7 +36,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
           <Reveal>
             <SectionHeading
               label="Featured Projects"
-              title="Spaces We Have Transformed"
+              title="Spaces We Have Built"
               description="Residential and commercial success stories across Malaysia and Singapore."
             />
           </Reveal>
@@ -51,7 +51,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
                   type="button"
                   onClick={() => setFilter(f.key)}
                   className={cn(
-                    'relative min-h-[44px] rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-colors',
+                    'relative min-h-[44px] rounded-full px-5 py-3 text-sm font-medium transition-colors',
                     filter === f.key ? 'text-beige-50' : 'text-graphite-500 hover:text-graphite-700',
                   )}
                 >
@@ -59,7 +59,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
                     <motion.span
                       layoutId="project-filter"
                       className="absolute inset-0 rounded-full bg-graphite-600"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
+                      transition={{ type: 'spring', damping: 28, stiffness: 320 }}
                     />
                   )}
                   <span className="relative z-10">{f.label}</span>
@@ -86,17 +86,17 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
                   <img
                     src={project.image}
                     alt={project.name}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-graphite-800/95 via-graphite-800/20 to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-graphite-800/95 via-graphite-800/20 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
                 <div className="absolute inset-x-0 bottom-0 p-5">
                   <Badge variant="dark" className="mb-2">
                     {project.category === 'residential' ? 'Residential' : 'Commercial'}
                   </Badge>
                   <h3 className="font-display text-xl font-medium text-white">{project.name}</h3>
-                  <p className="mt-1 flex items-center gap-1 text-sm text-beige-200/70">
+                  <p className="mt-1 flex items-center gap-1 text-sm text-beige-200/90">
                     <MapPin size={12} /> {project.location}
                   </p>
                 </div>
@@ -112,7 +112,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-end justify-center bg-graphite-800/70 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+            className="fixed inset-0 z-modal-backdrop flex items-end justify-center bg-graphite-800/70 p-0 backdrop-blur-sm sm:items-center sm:p-6"
             onClick={() => setSelected(null)}
             role="presentation"
           >
@@ -123,7 +123,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
-              className="max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-beige-50 p-5 pb-safe shadow-2xl sm:rounded-3xl sm:p-6"
+              className="z-modal max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-beige-50 p-5 pb-safe shadow-2xl sm:rounded-2xl sm:p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <button

@@ -13,7 +13,7 @@ export function Projects() {
       <PageHeader
         label="Our Portfolio"
         title="Success Stories That Speak for Themselves"
-        description="Explore our featured works across residential and commercial sectors — from landed homes to shoplots, offices, and industrial spaces."
+        description="Residential and commercial work across Penang, Selangor, Kedah, and Singapore. Landed homes, condos, shoplots, offices, and industrial spaces."
       />
 
       <section className="border-b border-beige-300/50 bg-beige-50 py-10">
@@ -27,7 +27,7 @@ export function Projects() {
             <Reveal key={stat.label} delay={i * 0.05}>
               <div className="text-center">
                 <div className="font-display text-3xl font-semibold text-graphite-800">{stat.value}</div>
-                <div className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-graphite-400">{stat.label}</div>
+                <div className="mt-1 text-xs font-medium text-graphite-500">{stat.label}</div>
               </div>
             </Reveal>
           ))}

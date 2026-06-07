@@ -6,7 +6,7 @@ import { processSteps } from '@/data/projects';
 
 const expectations = [
   { title: 'Regular Updates', desc: 'Progress photos and site reports so you always know where your project stands.' },
-  { title: 'Fixed Scope & Pricing', desc: 'Clear quotations with defined scope — no hidden costs or surprise add-ons.' },
+  { title: 'Fixed Scope & Pricing', desc: 'Clear quotations with defined scope. No hidden costs or surprise add-ons.' },
   { title: 'Quality Inspections', desc: 'Multi-stage quality checks at key milestones before proceeding.' },
   { title: 'Single Team Accountability', desc: 'One project manager coordinates design, build, and carpentry.' },
 ];
@@ -33,7 +33,7 @@ export function Process() {
                 </div>
                 <div className="pt-2">
                   <h3 className="font-display text-xl font-medium text-graphite-800">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-graphite-400">{step.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-graphite-500">{step.description}</p>
                 </div>
               </div>
             </Reveal>
@@ -51,7 +51,7 @@ export function Process() {
               <Reveal key={item.title} delay={i * 0.05}>
                 <div className="rounded-2xl border border-beige-300/60 bg-beige-50 p-6">
                   <h4 className="font-semibold text-graphite-700">{item.title}</h4>
-                  <p className="mt-2 text-sm text-graphite-400">{item.desc}</p>
+                  <p className="mt-2 text-sm text-graphite-500">{item.desc}</p>
                 </div>
               </Reveal>
             ))}

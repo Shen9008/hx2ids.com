@@ -25,7 +25,7 @@ export function About() {
       <PageHeader
         label="About Hx2 Design"
         title="Designing With Purpose, Building With Integrity"
-        description="We don't just renovate — we transform. Discover the vision and capabilities behind over 150 successful projects."
+        description="A Penang design and build firm with 150+ completed homes, condos, and commercial fit-outs across Malaysia and Singapore."
       />
 
       <section className="py-16 sm:py-20">
@@ -40,10 +40,10 @@ export function About() {
               <SectionHeading
                 label="Our Story"
                 title="More Than a Design Firm"
-                description="Over 7 years, Hx2 Design has evolved into a full-service design and construction firm known for blending aesthetic brilliance with structural integrity."
+                description="Over seven years, Hx2 Design has grown into a full-service firm covering layout, 3D renders, renovation, and in-house carpentry."
               />
-              <p className="mt-4 text-graphite-400 leading-relaxed">
-                From residential sanctuaries to high-performance commercial hubs, we bring vision to life — managing every detail from the first sketch to the final handover.
+              <p className="text-pretty mt-4 leading-relaxed text-graphite-500">
+                From landed homes to shoplots and offices, we manage each stage from first sketch through construction to handover.
               </p>
             </Reveal>
           </div>
@@ -79,7 +79,7 @@ export function About() {
               <Reveal key={v.title} delay={i * 0.05}>
                 <div className="rounded-2xl border border-beige-300/60 bg-beige-50 p-6 transition-shadow hover:shadow-md">
                   <h4 className="font-semibold text-beige-600">{v.title}</h4>
-                  <p className="mt-2 text-sm text-graphite-400">{v.desc}</p>
+                  <p className="mt-2 text-sm text-graphite-500">{v.desc}</p>
                 </div>
               </Reveal>
             ))}

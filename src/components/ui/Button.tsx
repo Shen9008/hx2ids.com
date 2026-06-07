@@ -29,7 +29,7 @@ const sizes: Record<Size, string> = {
 };
 
 const base =
-  'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-semibold uppercase tracking-wider transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beige-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+  'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-semibold transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-beige-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', to, href, shine = true, children, ...props }, ref) => {

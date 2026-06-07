@@ -48,7 +48,7 @@ export const services = [
   { id: 'design', title: 'Interior Design & Consultancy', description: 'Conceptualization, 3D visualization, and space planning tailored to your lifestyle or brand identity.', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', icon: 'Palette' },
   { id: 'renovation', title: 'Renovation & Construction', description: 'Structural works, tiling, plumbing, and electrical installations executed to the highest standards.', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80', icon: 'Hammer' },
   { id: 'carpentry', title: 'Custom Carpentry', description: 'In-house fabrication of bespoke furniture, cabinetry, and built-in solutions for any space.', image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d4046?w=800&q=80', icon: 'Ruler' },
-  { id: 'management', title: 'Project Management', description: 'Turnkey solutions from site supervision to final handover — on time, on budget, stress-free.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80', icon: 'ClipboardCheck' },
+  { id: 'management', title: 'Project Management', description: 'Site supervision, progress reporting, and handover from one accountable project manager.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80', icon: 'ClipboardCheck' },
 ];
 
 export const processSteps = [

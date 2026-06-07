@@ -29,7 +29,7 @@ export function Contact() {
           <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
             <Reveal className="lg:col-span-2">
               <h2 className="font-display text-2xl font-medium text-graphite-800">We'd Love to Hear From You</h2>
-              <p className="mt-4 text-base text-graphite-400">Whether you're planning a home renovation, commercial fit-out, or just exploring ideas — we'll respond within 1 business day.</p>
+              <p className="mt-4 text-base text-graphite-500">Planning a home renovation, commercial fit-out, or early ideas? We reply within one business day.</p>
 
               <div className="mt-8 space-y-6">
                 {[
@@ -44,9 +44,9 @@ export function Contact() {
                     <div>
                       <h4 className="text-sm font-semibold text-graphite-700">{item.title}</h4>
                       {item.href ? (
-                        <a href={item.href} className="mt-1 block min-h-[44px] py-1 text-base text-graphite-400 hover:text-beige-600">{item.content}</a>
+                        <a href={item.href} className="mt-1 block min-h-[44px] py-1 text-base text-graphite-500 hover:text-beige-600">{item.content}</a>
                       ) : (
-                        <p className="mt-1 whitespace-pre-line text-base text-graphite-400">{item.content}</p>
+                        <p className="mt-1 whitespace-pre-line text-base text-graphite-500">{item.content}</p>
                       )}
                     </div>
                   </div>
@@ -71,23 +71,23 @@ export function Contact() {
                 <h3 className="font-display text-2xl font-medium text-graphite-800">Send Us a Message</h3>
                 <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="firstName" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">First Name</label>
+                    <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-graphite-600">First name</label>
                     <input required id="firstName" name="firstName" autoComplete="given-name" className={formFieldClass} />
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">Last Name</label>
+                    <label htmlFor="lastName" className="mb-2 block text-sm font-medium text-graphite-600">Last name</label>
                     <input required id="lastName" name="lastName" autoComplete="family-name" className={formFieldClass} />
                   </div>
                   <div>
-                    <label htmlFor="email" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">Email</label>
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-graphite-600">Email</label>
                     <input required type="email" id="email" name="email" autoComplete="email" inputMode="email" className={formFieldClass} />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">Phone</label>
+                    <label htmlFor="phone" className="mb-2 block text-sm font-medium text-graphite-600">Phone</label>
                     <input required type="tel" id="phone" name="phone" autoComplete="tel" inputMode="tel" className={formFieldClass} />
                   </div>
                   <div className="sm:col-span-2">
-                    <label htmlFor="service" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">Service</label>
+                    <label htmlFor="service" className="mb-2 block text-sm font-medium text-graphite-600">Service</label>
                     <select id="service" name="service" className={formFieldClass}>
                       <option value="">Select a service</option>
                       <option value="design">Interior Design & Consultancy</option>
@@ -97,7 +97,7 @@ export function Contact() {
                     </select>
                   </div>
                   <div className="sm:col-span-2">
-                    <label htmlFor="message" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-graphite-500">Message</label>
+                    <label htmlFor="message" className="mb-2 block text-sm font-medium text-graphite-600">Message</label>
                     <textarea required id="message" name="message" rows={4} placeholder="Tell us about your project..." className={`${formFieldClass} resize-y`} />
                   </div>
                 </div>

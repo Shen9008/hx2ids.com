@@ -9,6 +9,11 @@
     overflow-x: clip;
   }
 
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-none ring-2 ring-beige-500 ring-offset-2 ring-offset-beige-100;
+  }
+
   body {
     @apply bg-beige-100 font-sans text-graphite-600 antialiased;
     overflow-x: clip;
@@ -32,6 +37,10 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
   }
 
   .pb-safe {
@@ -127,12 +136,12 @@
 
   .btn-elegant {
     transform: translateY(0);
-    box-shadow: 0 4px 14px rgba(58, 58, 58, 0.12);
+    box-shadow: none;
   }
 
   .btn-elegant:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(58, 58, 58, 0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(58, 58, 58, 0.14);
   }
 
   .btn-elegant:active {

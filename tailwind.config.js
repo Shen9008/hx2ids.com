@@ -61,6 +61,16 @@ export default {
       backgroundSize: {
         grid: '48px 48px',
       },
+      zIndex: {
+        shader: '1',
+        overlay: '2',
+        content: '10',
+        dropdown: '20',
+        sticky: '30',
+        'modal-backdrop': '40',
+        modal: '50',
+        toast: '60',
+      },
     },
   },
   plugins: [],

@@ -30,14 +30,14 @@ export function Home() {
               <SectionHeading
                 label="About Hx2 Design"
                 title="Crafting Spaces That Inspire"
-                description="With over 7 years of industry expertise, we serve clients across Penang, Selangor, Kedah, and Singapore — blending aesthetic brilliance with structural integrity."
+                description="Seven years of fit-outs across Penang, Selangor, Kedah, and Singapore. We handle layout, 3D renders, construction, and custom carpentry in-house."
               />
               <Button to="/about" variant="outline" className="mt-8">
                 Learn More About Us
               </Button>
             </Reveal>
             <Reveal delay={0.15}>
-              <motion.div whileHover={{ scale: 1.02 }} className="overflow-hidden rounded-3xl shadow-xl">
+              <motion.div className="overflow-hidden rounded-2xl shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1600210492486-724fe3c67fb0?w=800&q=80"
                   alt="Hx2 Design interior"
@@ -70,7 +70,7 @@ export function Home() {
                     <CheckCircle2 size={20} />
                   </div>
                   <h3 className="font-display text-xl font-medium text-graphite-800">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-graphite-400">{item.desc}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-graphite-500">{item.desc}</p>
                 </motion.div>
               </Reveal>
             ))}
@@ -95,10 +95,10 @@ export function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {processSteps.slice(0, 3).map((step, i) => (
               <Reveal key={step.step} delay={i * 0.1}>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-                  <span className="font-display text-5xl font-light text-beige-400/40">{step.step}</span>
+                <div className="rounded-2xl border border-white/10 bg-graphite-600/40 p-8">
+                  <span className="font-display text-5xl font-light text-beige-400/50">{step.step}</span>
                   <h3 className="mt-4 font-display text-xl font-medium">{step.title}</h3>
-                  <p className="mt-3 text-sm text-beige-200/70">{step.description}</p>
+                  <p className="mt-3 text-sm text-beige-200/90">{step.description}</p>
                 </div>
               </Reveal>
             ))}

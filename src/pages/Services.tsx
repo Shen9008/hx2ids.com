@@ -18,7 +18,7 @@ export function Services() {
       <PageHeader
         label="Our Services"
         title="Full-Service Design & Build Under One Roof"
-        description="Skill sets honed over 7 years of experience in residential and commercial design — all meant to serve you better."
+        description="Seven years of residential and commercial work in Penang and beyond. One team for design, build, and handover."
       />
 
       <div className="divide-y divide-beige-300/50">
@@ -41,11 +41,8 @@ export function Services() {
                 </Reveal>
 
                 <Reveal delay={0.1} className={`flex flex-col justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <span className="text-xs font-semibold uppercase tracking-widest text-beige-600">
-                    {String(i + 1).padStart(2, '0')} — Service
-                  </span>
-                  <h2 className="mt-2 font-display text-3xl font-medium text-graphite-800">{service.title}</h2>
-                  <p className="mt-4 leading-relaxed text-graphite-400">{service.description}</p>
+                  <h2 className="text-balance font-display text-3xl font-medium text-graphite-800">{service.title}</h2>
+                  <p className="text-pretty mt-4 leading-relaxed text-graphite-500">{service.description}</p>
                   <ul className="mt-6 space-y-3">
                     {details[service.id]?.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-graphite-500">
@@ -69,13 +66,13 @@ export function Services() {
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {[
               { title: '3D Before You Build', desc: 'Photorealistic renders let you approve every detail before construction starts.' },
-              { title: 'Single Point of Contact', desc: 'Design, build, and carpentry under one team for seamless communication.' },
+              { title: 'Single Point of Contact', desc: 'Design, build, and carpentry under one team with one project manager.' },
               { title: 'Quality You Can See', desc: 'In-house workshops and vetted supply chain ensure exacting standards.' },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.1}>
-                <div className="flex h-full min-h-[180px] flex-col rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm">
+                <div className="flex h-full min-h-[180px] flex-col rounded-2xl border border-white/10 bg-graphite-600/40 p-8 text-center">
                   <h3 className="font-display text-lg text-beige-50">{item.title}</h3>
-                  <p className="mt-3 text-sm text-beige-200/70">{item.desc}</p>
+                  <p className="mt-3 text-sm text-beige-200/90">{item.desc}</p>
                 </div>
               </Reveal>
             ))}

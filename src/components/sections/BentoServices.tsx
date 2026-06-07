@@ -15,7 +15,7 @@ export function BentoServices() {
           <SectionHeading
             label="Our Services"
             title="Comprehensive Design & Build Solutions"
-            description="Everything you need under one roof — from initial concept to keys-in-hand delivery."
+            description="Concept, 3D renders, renovation, and custom carpentry from one Penang-based team."
           />
         </Reveal>
 
@@ -26,13 +26,13 @@ export function BentoServices() {
             return (
               <Reveal key={service.id} delay={i * 0.05}>
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  className="group gradient-border relative flex h-full min-h-[300px] overflow-hidden rounded-2xl bg-beige-50 shadow-sm transition-shadow hover:shadow-xl sm:min-h-[380px] lg:min-h-[400px]"
+                  whileHover={{ y: -2 }}
+                  className="group gradient-border relative flex h-full min-h-[300px] overflow-hidden rounded-2xl bg-beige-50 shadow-sm transition-shadow hover:shadow-lg sm:min-h-[380px] lg:min-h-[400px]"
                 >
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-graphite-800/95 via-graphite-800/40 to-graphite-800/10" />
                   <div className="relative mt-auto p-6">
@@ -40,12 +40,12 @@ export function BentoServices() {
                       <Icon size={18} />
                     </div>
                     <h3 className="font-display text-xl font-medium text-white sm:text-2xl">{service.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-beige-100/75">{service.description}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-beige-100/90">{service.description}</p>
                     <Link
                       to={`/services#${service.id}`}
-                      className="mt-4 inline-flex min-h-[44px] items-center gap-1 text-xs font-semibold uppercase tracking-wider text-beige-200 transition-colors group-hover:text-white"
+                      className="mt-4 inline-flex min-h-[44px] items-center gap-1 text-sm font-medium text-beige-200 transition-colors group-hover:text-white"
                     >
-                      Explore <ArrowUpRight size={14} />
+                      View service details <ArrowUpRight size={14} />
                     </Link>
                   </div>
                 </motion.div>
