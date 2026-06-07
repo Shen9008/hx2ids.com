@@ -20,6 +20,20 @@ export function Process() {
         description="Our structured six-step process keeps you informed, involved, and confident at every stage."
       />
 
+      <section className="border-b border-beige-300/40 py-10 sm:py-12">
+        <Reveal>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80"
+                alt="Interior design planning and visualization"
+                className="aspect-[21/9] w-full object-cover"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           {processSteps.map((step, i) => (

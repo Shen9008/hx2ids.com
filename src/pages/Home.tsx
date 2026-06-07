@@ -39,7 +39,7 @@ export function Home() {
             <Reveal delay={0.15}>
               <motion.div className="overflow-hidden rounded-2xl shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1600210492486-724fe3c67fb0?w=800&q=80"
+                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80"
                   alt="Hx2 Design interior"
                   className="aspect-[4/5] w-full object-cover"
                 />
