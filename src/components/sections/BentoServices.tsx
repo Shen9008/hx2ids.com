@@ -9,7 +9,7 @@ const icons = { Palette, Hammer, Ruler, ClipboardCheck };
 
 export function BentoServices() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -27,7 +27,7 @@ export function BentoServices() {
               <Reveal key={service.id} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="group gradient-border relative flex h-full min-h-[380px] overflow-hidden rounded-2xl bg-beige-50 shadow-sm transition-shadow hover:shadow-xl sm:min-h-[400px]"
+                  className="group gradient-border relative flex h-full min-h-[300px] overflow-hidden rounded-2xl bg-beige-50 shadow-sm transition-shadow hover:shadow-xl sm:min-h-[380px] lg:min-h-[400px]"
                 >
                   <img
                     src={service.image}
@@ -43,7 +43,7 @@ export function BentoServices() {
                     <p className="mt-2 text-sm leading-relaxed text-beige-100/75">{service.description}</p>
                     <Link
                       to={`/services#${service.id}`}
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-beige-200 transition-colors group-hover:text-white"
+                      className="mt-4 inline-flex min-h-[44px] items-center gap-1 text-xs font-semibold uppercase tracking-wider text-beige-200 transition-colors group-hover:text-white"
                     >
                       Explore <ArrowUpRight size={14} />
                     </Link>

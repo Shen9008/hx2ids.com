@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -19,6 +19,19 @@ export function Navbar() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
 
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+    document.body.style.overflow = '';
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setOpen((prev) => {
+      const next = !prev;
+      document.body.style.overflow = next ? 'hidden' : '';
+      return next;
+    });
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -26,9 +39,17 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    setOpen(false);
-    document.body.style.overflow = '';
-  }, [pathname]);
+    closeMenu();
+  }, [pathname, closeMenu]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMenu();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, closeMenu]);
 
   const lightHero = isHome && !scrolled;
 
@@ -39,18 +60,16 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         className={cn(
           'fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] transition-all duration-500 sm:px-6',
-          scrolled || !isHome ? 'py-3' : 'py-5',
+          scrolled || !isHome ? 'py-3' : 'py-4 sm:py-5',
         )}
       >
         <div
           className={cn(
-            'mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-500 sm:px-6',
-            lightHero
-              ? 'bg-transparent'
-              : 'glass shadow-lg shadow-graphite-600/5',
+            'mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-3 py-2.5 transition-all duration-500 sm:px-6 sm:py-3',
+            lightHero ? 'bg-transparent' : 'glass shadow-lg shadow-graphite-600/5',
           )}
         >
-          <Link to="/" className="group flex items-center gap-3">
+          <Link to="/" className="group flex min-h-[44px] items-center gap-2 sm:gap-3">
             <span
               className={cn(
                 'flex h-10 w-10 items-center justify-center rounded-lg text-xs font-bold tracking-wider transition-colors',
@@ -63,7 +82,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                'font-display text-xl font-semibold tracking-wide transition-colors',
+                'font-display text-lg font-semibold tracking-wide transition-colors sm:text-xl',
                 lightHero ? 'text-white' : 'text-graphite-800',
               )}
             >
@@ -77,7 +96,7 @@ export function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={cn(
-                  'relative rounded-lg px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors',
+                  'relative min-h-[44px] rounded-lg px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors',
                   lightHero ? 'text-white/90 hover:text-white' : 'text-graphite-600 hover:text-graphite-800',
                   pathname === link.to && (lightHero ? 'text-white' : 'text-graphite-800'),
                 )}
@@ -104,14 +123,13 @@ export function Navbar() {
           <button
             type="button"
             className={cn(
-              'flex h-11 w-11 items-center justify-center rounded-xl lg:hidden',
+              'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl lg:hidden',
               lightHero ? 'text-white' : 'text-graphite-700',
             )}
-            onClick={() => {
-              setOpen((v) => !v);
-              document.body.style.overflow = open ? '' : 'hidden';
-            }}
-            aria-label="Toggle menu"
+            onClick={toggleMenu}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -125,14 +143,15 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-graphite-800/40 backdrop-blur-sm lg:hidden"
-            onClick={() => setOpen(false)}
+            onClick={closeMenu}
           >
             <motion.nav
+              id="mobile-nav"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="absolute right-0 top-0 flex h-full w-[min(320px,85vw)] flex-col gap-1 bg-beige-50 p-6 pt-24 shadow-2xl"
+              className="absolute right-0 top-0 flex h-full w-[min(320px,85vw)] flex-col gap-1 bg-beige-50 p-6 pb-safe pt-[max(6rem,env(safe-area-inset-top))] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {links.map((link) => (
@@ -140,7 +159,7 @@ export function Navbar() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    'rounded-xl px-4 py-3 text-base font-medium transition-colors',
+                    'flex min-h-[48px] items-center rounded-xl px-4 py-3 text-base font-medium transition-colors',
                     pathname === link.to ? 'bg-beige-200 text-graphite-800' : 'text-graphite-600 hover:bg-beige-100',
                   )}
                 >

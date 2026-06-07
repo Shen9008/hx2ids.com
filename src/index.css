@@ -6,10 +6,22 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-beige-100 font-sans text-graphite-600 antialiased;
+    overflow-x: clip;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-size: inherit;
   }
 
   ::selection {
@@ -20,6 +32,14 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .pt-safe {
+    padding-top: max(1rem, env(safe-area-inset-top));
   }
 
   .glass {
@@ -183,5 +203,16 @@
   @keyframes btnShimmer {
     0% { background-position: 0% 50%; }
     100% { background-position: 250% 50%; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shader-fallback,
+  .btn-elegant--shimmer {
+    animation: none !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
   }
 }

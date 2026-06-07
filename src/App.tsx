@@ -21,7 +21,7 @@ function ScrollToTop() {
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-60">
+      <div className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden opacity-60 md:block">
         <ShaderBackground variant="light" opacity={0.85} />
       </div>
       <Navbar />

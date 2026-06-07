@@ -8,7 +8,7 @@ export function Marquee() {
 
   return (
     <section className="overflow-hidden border-y border-beige-300/60 bg-beige-50 py-5">
-      <div className="flex animate-marquee whitespace-nowrap">
+      <div className="flex animate-marquee whitespace-nowrap motion-reduce:animate-none">
         {doubled.map((item, i) => (
           <span key={i} className="mx-6 flex items-center gap-6 text-sm font-medium uppercase tracking-widest text-graphite-400">
             {item}

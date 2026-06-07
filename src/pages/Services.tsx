@@ -26,7 +26,7 @@ export function Services() {
           <section
             key={service.id}
             id={service.id}
-            className={`py-20 ${i % 2 === 1 ? 'bg-beige-200/40' : 'bg-beige-100'}`}
+            className={`py-16 sm:py-20 ${i % 2 === 1 ? 'bg-beige-200/40' : 'bg-beige-100'}`}
           >
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -61,7 +61,7 @@ export function Services() {
         ))}
       </div>
 
-      <section className="bg-graphite-700 py-20">
+      <section className="bg-graphite-700 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading label="Unique Propositions" title="Why Clients Choose Hx2" align="center" dark />

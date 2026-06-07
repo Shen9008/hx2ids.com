@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { shouldUseLightweightGraphics } from '@/lib/mobile';
 
 const VERTEX = `
   attribute vec2 a_position;
@@ -33,7 +34,7 @@ const FRAGMENT = `
     float v = 0.0;
     float a = 0.5;
     mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
       v += a * noise(p);
       p = rot * p * 2.1 + vec2(1.7, 2.3);
       a *= 0.5;
@@ -85,7 +86,6 @@ function compileShader(gl: WebGLRenderingContext, type: number, source: string) 
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    console.warn('Shader compile error:', gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
     return null;
   }
@@ -111,8 +111,7 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
+    if (shouldUseLightweightGraphics()) {
       setMode('fallback');
       return;
     }
@@ -159,9 +158,11 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     const uDark = gl.getUniformLocation(program, 'u_dark');
 
     const isDark = variant === 'dark' || variant === 'hero' ? 1 : 0;
+    let isVisible = true;
+    let tabVisible = !document.hidden;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
+      const dpr = Math.min(window.devicePixelRatio, 1.5);
       const { clientWidth, clientHeight } = container;
       if (clientWidth === 0 || clientHeight === 0) return;
       canvas.width = Math.floor(clientWidth * dpr);
@@ -178,9 +179,26 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     });
     ro.observe(container);
 
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 },
+    );
+    io.observe(container);
+
+    const onVisibility = () => {
+      tabVisible = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
     const start = performance.now();
 
     const draw = (now: number) => {
+      if (!isVisible || !tabVisible) {
+        frameRef.current = requestAnimationFrame(draw);
+        return;
+      }
       if (canvas.width === 0 || canvas.height === 0) {
         frameRef.current = requestAnimationFrame(draw);
         return;
@@ -198,6 +216,8 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     return () => {
       cancelAnimationFrame(frameRef.current);
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       gl.deleteProgram(program);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
@@ -215,17 +235,14 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     >
       <canvas
         ref={canvasRef}
-        className={cn(
-          'h-full w-full transition-opacity duration-700',
-          mode === 'webgl' ? 'opacity-100' : 'opacity-0',
-        )}
+        className={cn('h-full w-full', mode !== 'webgl' && 'hidden')}
         style={{ opacity: mode === 'webgl' ? opacity : 0 }}
       />
       <div
         className={cn(
-          'shader-fallback absolute inset-0 transition-opacity duration-700',
+          'shader-fallback absolute inset-0',
           isDark ? 'shader-fallback--dark' : 'shader-fallback--light',
-          mode === 'webgl' ? 'opacity-0' : '',
+          mode === 'webgl' && 'hidden',
         )}
         style={{ opacity: mode === 'webgl' ? 0 : opacity }}
       />

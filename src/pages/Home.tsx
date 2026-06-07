@@ -23,7 +23,7 @@ export function Home() {
       <Hero />
       <Marquee />
 
-      <section className="bg-beige-200/40 py-20 sm:py-28">
+      <section className="bg-beige-200/40 py-16 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
@@ -49,7 +49,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28">
+      <section className="py-16 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading
@@ -80,7 +80,7 @@ export function Home() {
 
       <BentoServices />
 
-      <section className="relative overflow-hidden bg-graphite-800 py-20 text-beige-50 sm:py-28">
+      <section className="relative overflow-hidden bg-graphite-800 py-16 text-beige-50 sm:py-20 lg:py-28">
         <ShaderBackground variant="dark" opacity={0.85} />
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>

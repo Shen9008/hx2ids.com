@@ -30,7 +30,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
   ];
 
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {showHeading && (
           <Reveal>
@@ -51,7 +51,7 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
                   type="button"
                   onClick={() => setFilter(f.key)}
                   className={cn(
-                    'relative rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors',
+                    'relative min-h-[44px] rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-colors',
                     filter === f.key ? 'text-beige-50' : 'text-graphite-500 hover:text-graphite-700',
                   )}
                 >
@@ -114,25 +114,29 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-end justify-center bg-graphite-800/70 p-0 backdrop-blur-sm sm:items-center sm:p-6"
             onClick={() => setSelected(null)}
+            role="presentation"
           >
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
-              className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-beige-50 p-6 shadow-2xl sm:rounded-3xl"
+              className="max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-beige-50 p-5 pb-safe shadow-2xl sm:rounded-3xl sm:p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 type="button"
                 onClick={() => setSelected(null)}
-                className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-beige-200 text-graphite-600"
-                aria-label="Close"
+                className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-beige-200 text-graphite-600"
+                aria-label="Close project details"
               >
                 <X size={18} />
               </button>
               <img src={selected.image} alt={selected.name} className="aspect-video w-full rounded-2xl object-cover" />
               <Badge className="mt-5">{selected.category === 'residential' ? 'Residential' : 'Commercial'}</Badge>
-              <h2 className="mt-3 font-display text-2xl font-medium text-graphite-800">{selected.name}</h2>
+              <h2 id="project-modal-title" className="mt-3 font-display text-2xl font-medium text-graphite-800">{selected.name}</h2>
               <p className="mt-3 text-graphite-500">{selected.description}</p>
               <div className="mt-5 space-y-2 border-t border-beige-300 pt-5 text-sm">
                 <p className="flex items-center gap-2 text-graphite-600"><MapPin size={14} /> {selected.location}</p>

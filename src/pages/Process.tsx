@@ -20,7 +20,7 @@ export function Process() {
         description="Our structured six-step process keeps you informed, involved, and confident at every stage."
       />
 
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           {processSteps.map((step, i) => (
             <Reveal key={step.step} delay={i * 0.05}>
@@ -41,7 +41,7 @@ export function Process() {
         </div>
       </section>
 
-      <section className="bg-beige-200/40 py-20">
+      <section className="bg-beige-200/40 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading label="What to Expect" title="Transparency at Every Stage" align="center" />

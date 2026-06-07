@@ -28,7 +28,7 @@ export function About() {
         description="We don't just renovate — we transform. Discover the vision and capabilities behind over 150 successful projects."
       />
 
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
@@ -50,7 +50,7 @@ export function About() {
         </div>
       </section>
 
-      <section className="bg-beige-200/40 py-20">
+      <section className="bg-beige-200/40 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
@@ -69,7 +69,7 @@ export function About() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading label="Our Strengths" title="Scale, Quality & Control" align="center" />
@@ -87,7 +87,7 @@ export function About() {
         </div>
       </section>
 
-      <section className="bg-graphite-700 py-20">
+      <section className="bg-graphite-700 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading label="Service Areas" title="Where We Work" align="center" dark />
