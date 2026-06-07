@@ -1,8 +1,8 @@
 {
   "projectName": "hx2ids",
   "productionBranch": "main",
-  "framework": "static",
-  "buildCommand": "",
-  "outputDirectory": ".",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "rootDirectory": "/"
 }

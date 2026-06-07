@@ -1,6 +1,3 @@
 name = "hx2ids"
 compatibility_date = "2026-05-23"
-pages_build_output_dir = "."
-
-# Cloudflare Pages — static site (no build step)
-# Deploy: npx wrangler pages deploy . --project-name=hx2ids
+pages_build_output_dir = "dist"
