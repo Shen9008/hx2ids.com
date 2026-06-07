@@ -8,6 +8,7 @@ import { Services } from '@/pages/Services';
 import { Projects } from '@/pages/Projects';
 import { Process } from '@/pages/Process';
 import { Contact } from '@/pages/Contact';
+import { ShaderBackground } from '@/components/ui/ShaderBackground';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -20,6 +21,9 @@ function ScrollToTop() {
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <ShaderBackground variant="light" opacity={0.35} />
+      </div>
       <Navbar />
       <main>{children}</main>
       <Footer />

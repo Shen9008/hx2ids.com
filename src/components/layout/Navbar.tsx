@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/Button';
 
 const links = [
   { to: '/', label: 'Home' },
@@ -90,17 +91,14 @@ export function Navbar() {
                 )}
               </Link>
             ))}
-            <Link
+            <Button
               to="/contact"
-              className={cn(
-                'ml-2 inline-flex items-center justify-center rounded-lg px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all',
-                lightHero
-                  ? 'border border-white/40 bg-white/10 text-white hover:bg-white/20'
-                  : 'bg-graphite-600 text-beige-50 shadow-lg hover:bg-graphite-500',
-              )}
+              size="sm"
+              variant={lightHero ? 'glass' : 'primary'}
+              className={cn('ml-2', lightHero && 'text-white')}
             >
               Contact Us
-            </Link>
+            </Button>
           </nav>
 
           <button
@@ -149,12 +147,9 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/contact"
-                className="mt-4 flex w-full items-center justify-center rounded-lg bg-graphite-600 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-beige-50 transition-colors hover:bg-graphite-500"
-              >
+              <Button to="/contact" className="mt-4 w-full">
                 Contact Us
-              </Link>
+              </Button>
             </motion.nav>
           </motion.div>
         )}

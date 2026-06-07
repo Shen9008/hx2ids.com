@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Building2 } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -140,9 +139,9 @@ export function ProjectGrid({ showFilters = true, limit, showHeading = true }: P
                 <p className="flex items-center gap-2 text-graphite-600"><Building2 size={14} /> {selected.type}</p>
                 <p className="text-graphite-400">{selected.condition}</p>
               </div>
-              <Link to="/contact" className="mt-6 block">
-                <Button className="w-full">Enquire About This Project</Button>
-              </Link>
+              <Button to="/contact" className="mt-6 w-full">
+                Enquire About This Project
+              </Button>
             </motion.div>
           </motion.div>
         )}

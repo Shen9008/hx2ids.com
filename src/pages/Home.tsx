@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { Hero } from '@/components/sections/Hero';
@@ -9,6 +8,7 @@ import { CTABanner } from '@/components/sections/CTABanner';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
+import { ShaderBackground } from '@/components/ui/ShaderBackground';
 import { processSteps } from '@/data/projects';
 
 const usps = [
@@ -32,9 +32,9 @@ export function Home() {
                 title="Crafting Spaces That Inspire"
                 description="With over 7 years of industry expertise, we serve clients across Penang, Selangor, Kedah, and Singapore — blending aesthetic brilliance with structural integrity."
               />
-              <Link to="/about" className="mt-8 inline-block">
-                <Button variant="outline">Learn More About Us</Button>
-              </Link>
+              <Button to="/about" variant="outline" className="mt-8">
+                Learn More About Us
+              </Button>
             </Reveal>
             <Reveal delay={0.15}>
               <motion.div whileHover={{ scale: 1.02 }} className="overflow-hidden rounded-3xl shadow-xl">
@@ -80,8 +80,9 @@ export function Home() {
 
       <BentoServices />
 
-      <section className="bg-graphite-700 py-20 text-beige-50 sm:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <section className="relative overflow-hidden bg-graphite-700 py-20 text-beige-50 sm:py-28">
+        <ShaderBackground variant="dark" opacity={0.4} />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading
               label="Our Process"
@@ -103,11 +104,9 @@ export function Home() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Link to="/process">
-              <Button variant="glass" className="border-white/20 bg-white/10 text-white hover:bg-white/20">
-                See Full Process
-              </Button>
-            </Link>
+            <Button to="/process" variant="glass" className="border-white/20 text-white">
+              See Full Process
+            </Button>
           </div>
         </div>
       </section>
