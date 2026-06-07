@@ -47,29 +47,31 @@
     pointer-events: none;
   }
 
-  /* Shader CSS fallback */
+  /* Shader CSS fallback — visible animated mesh when WebGL unavailable */
   .shader-fallback {
-    animation: shaderDrift 18s ease-in-out infinite alternate;
+    background-size: 200% 200%;
+    animation: shaderDrift 12s ease-in-out infinite;
   }
 
   .shader-fallback--light {
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(184, 168, 138, 0.45), transparent 55%),
-      radial-gradient(ellipse 70% 50% at 80% 70%, rgba(221, 208, 184, 0.5), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 50% 50%, rgba(245, 240, 230, 0.9), rgba(235, 227, 212, 1));
+    background-image:
+      radial-gradient(ellipse 70% 55% at 15% 25%, rgba(184, 168, 138, 0.7), transparent 50%),
+      radial-gradient(ellipse 65% 50% at 85% 75%, rgba(210, 185, 140, 0.55), transparent 45%),
+      radial-gradient(ellipse 55% 45% at 55% 45%, rgba(245, 240, 230, 0.95), rgba(225, 210, 185, 0.85));
   }
 
   .shader-fallback--dark {
-    background:
-      radial-gradient(ellipse 80% 60% at 25% 25%, rgba(114, 102, 84, 0.35), transparent 55%),
-      radial-gradient(ellipse 70% 50% at 75% 75%, rgba(58, 58, 58, 0.6), transparent 50%),
-      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(42, 42, 42, 1), rgba(26, 26, 26, 1));
+    background-image:
+      radial-gradient(ellipse 70% 55% at 20% 20%, rgba(160, 140, 110, 0.55), transparent 50%),
+      radial-gradient(ellipse 65% 50% at 80% 80%, rgba(90, 80, 65, 0.5), transparent 45%),
+      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(48, 48, 48, 1), rgba(18, 18, 18, 1));
   }
 
   @keyframes shaderDrift {
-    0% { filter: hue-rotate(0deg) brightness(1); transform: scale(1) translate(0, 0); }
-    50% { filter: hue-rotate(8deg) brightness(1.03); transform: scale(1.04) translate(1%, -1%); }
-    100% { filter: hue-rotate(-5deg) brightness(0.98); transform: scale(1.02) translate(-1%, 1%); }
+    0% { background-position: 0% 50%; transform: scale(1); }
+    33% { background-position: 100% 0%; transform: scale(1.06); }
+    66% { background-position: 50% 100%; transform: scale(1.03); }
+    100% { background-position: 0% 50%; transform: scale(1); }
   }
 
   /* Elegant button hover effects */

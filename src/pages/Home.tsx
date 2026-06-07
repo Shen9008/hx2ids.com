@@ -80,8 +80,8 @@ export function Home() {
 
       <BentoServices />
 
-      <section className="relative overflow-hidden bg-graphite-700 py-20 text-beige-50 sm:py-28">
-        <ShaderBackground variant="dark" opacity={0.4} />
+      <section className="relative overflow-hidden bg-graphite-800 py-20 text-beige-50 sm:py-28">
+        <ShaderBackground variant="dark" opacity={0.85} />
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <SectionHeading

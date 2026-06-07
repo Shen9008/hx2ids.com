@@ -33,9 +33,9 @@ const FRAGMENT = `
     float v = 0.0;
     float a = 0.5;
     mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
       v += a * noise(p);
-      p = rot * p * 2.02 + vec2(1.7, 2.3);
+      p = rot * p * 2.1 + vec2(1.7, 2.3);
       a *= 0.5;
     }
     return v;
@@ -45,31 +45,35 @@ const FRAGMENT = `
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
     float aspect = u_resolution.x / u_resolution.y;
     vec2 p = vec2(uv.x * aspect, uv.y);
-    float t = u_time * 0.1;
+    float t = u_time * 0.35;
 
-    float wave = fbm(p * 1.8 + vec2(t, t * 0.6));
-    float ripple = fbm(p * 3.5 - vec2(t * 0.8, t * 0.4));
-    float blend = smoothstep(0.15, 0.85, wave * 0.65 + ripple * 0.35);
+    float flow1 = fbm(p * 2.2 + vec2(t * 0.7, t * 0.4));
+    float flow2 = fbm(p * 3.8 - vec2(t * 0.5, t * 0.9));
+    float flow3 = sin(p.x * 4.0 + t * 1.2) * sin(p.y * 3.5 - t * 0.8) * 0.5 + 0.5;
+    float blend = flow1 * 0.45 + flow2 * 0.35 + flow3 * 0.2;
 
     vec3 beige = vec3(0.961, 0.941, 0.902);
     vec3 sand = vec3(0.855, 0.816, 0.753);
-    vec3 taupe = vec3(0.722, 0.659, 0.541);
-    vec3 grey = vec3(0.275, 0.275, 0.275);
-    vec3 charcoal = vec3(0.165, 0.165, 0.165);
+    vec3 gold = vec3(0.820, 0.745, 0.580);
+    vec3 taupe = vec3(0.620, 0.540, 0.420);
+    vec3 grey = vec3(0.320, 0.320, 0.320);
+    vec3 charcoal = vec3(0.120, 0.120, 0.120);
 
     vec3 col;
     if (u_dark > 0.5) {
       col = mix(charcoal, grey, blend);
-      col = mix(col, taupe, smoothstep(0.55, 1.0, ripple) * 0.4);
-      col = mix(col, sand, smoothstep(0.7, 1.0, wave) * 0.15);
+      col = mix(col, taupe, smoothstep(0.35, 0.85, flow2) * 0.55);
+      col = mix(col, gold, smoothstep(0.55, 1.0, flow1) * 0.35);
+      col += gold * 0.08 * sin(t * 2.0 + p.x * 8.0);
     } else {
       col = mix(beige, sand, blend);
-      col = mix(col, taupe, smoothstep(0.6, 1.0, ripple) * 0.25);
-      col += vec3(0.02) * sin(p.x * 6.0 + t * 2.0) * sin(p.y * 5.0 - t);
+      col = mix(col, gold, smoothstep(0.4, 0.9, flow2) * 0.45);
+      col = mix(col, taupe, smoothstep(0.6, 1.0, flow1) * 0.2);
+      col += vec3(0.04, 0.03, 0.02) * sin(p.x * 7.0 + t * 2.5) * sin(p.y * 6.0 - t * 1.5);
     }
 
-    float vignette = 1.0 - length((uv - 0.5) * vec2(1.0, 1.2)) * 0.35;
-    col *= clamp(vignette, 0.75, 1.0);
+    float vignette = 1.0 - length((uv - 0.5) * vec2(1.0, 1.15)) * 0.28;
+    col *= clamp(vignette, 0.82, 1.0);
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -81,6 +85,7 @@ function compileShader(gl: WebGLRenderingContext, type: number, source: string) 
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.warn('Shader compile error:', gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
     return null;
   }
@@ -96,29 +101,48 @@ interface ShaderBackgroundProps {
 }
 
 export function ShaderBackground({ variant = 'light', className, opacity = 1 }: ShaderBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef<number>(0);
-  const [active, setActive] = useState(false);
+  const [mode, setMode] = useState<'loading' | 'webgl' | 'fallback'>('loading');
 
   useEffect(() => {
+    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!container || !canvas) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      setMode('fallback');
+      return;
+    }
 
     const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
-    if (!gl) return;
-
-    setActive(true);
+    if (!gl) {
+      setMode('fallback');
+      return;
+    }
 
     const vs = compileShader(gl, gl.VERTEX_SHADER, VERTEX);
     const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAGMENT);
-    if (!vs || !fs) return;
+    if (!vs || !fs) {
+      setMode('fallback');
+      return;
+    }
 
     const program = gl.createProgram();
-    if (!program) return;
+    if (!program) {
+      setMode('fallback');
+      return;
+    }
+
     gl.attachShader(program, vs);
     gl.attachShader(program, fs);
     gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      setMode('fallback');
+      return;
+    }
 
     gl.useProgram(program);
 
@@ -134,22 +158,33 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     const uRes = gl.getUniformLocation(program, 'u_resolution');
     const uDark = gl.getUniformLocation(program, 'u_dark');
 
+    const isDark = variant === 'dark' || variant === 'hero' ? 1 : 0;
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio, 2);
-      const { clientWidth, clientHeight } = canvas;
-      canvas.width = clientWidth * dpr;
-      canvas.height = clientHeight * dpr;
+      const { clientWidth, clientHeight } = container;
+      if (clientWidth === 0 || clientHeight === 0) return;
+      canvas.width = Math.floor(clientWidth * dpr);
+      canvas.height = Math.floor(clientHeight * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
 
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
+    const ro = new ResizeObserver(() => {
+      resize();
+      if (container.clientWidth > 0 && container.clientHeight > 0) {
+        setMode('webgl');
+      }
+    });
+    ro.observe(container);
 
     const start = performance.now();
-    const isDark = variant === 'dark' || variant === 'hero' ? 1 : 0;
 
     const draw = (now: number) => {
+      if (canvas.width === 0 || canvas.height === 0) {
+        frameRef.current = requestAnimationFrame(draw);
+        return;
+      }
       const t = (now - start) / 1000;
       gl.uniform1f(uTime, t);
       gl.uniform2f(uRes, canvas.width, canvas.height);
@@ -161,7 +196,6 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
     frameRef.current = requestAnimationFrame(draw);
 
     return () => {
-      setActive(false);
       cancelAnimationFrame(frameRef.current);
       ro.disconnect();
       gl.deleteProgram(program);
@@ -174,18 +208,26 @@ export function ShaderBackground({ variant = 'light', className, opacity = 1 }: 
   const isDark = variant === 'dark' || variant === 'hero';
 
   return (
-    <div className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)} aria-hidden>
+    <div
+      ref={containerRef}
+      className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}
+      aria-hidden
+    >
       <canvas
         ref={canvasRef}
-        className={cn('h-full w-full', !active && 'hidden')}
-        style={{ opacity }}
+        className={cn(
+          'h-full w-full transition-opacity duration-700',
+          mode === 'webgl' ? 'opacity-100' : 'opacity-0',
+        )}
+        style={{ opacity: mode === 'webgl' ? opacity : 0 }}
       />
       <div
         className={cn(
-          'shader-fallback absolute inset-0',
+          'shader-fallback absolute inset-0 transition-opacity duration-700',
           isDark ? 'shader-fallback--dark' : 'shader-fallback--light',
-          active && 'hidden',
+          mode === 'webgl' ? 'opacity-0' : '',
         )}
+        style={{ opacity: mode === 'webgl' ? 0 : opacity }}
       />
     </div>
   );
