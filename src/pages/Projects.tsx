@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/layout/PageHeader';
-import { ProjectGrid } from '@/components/sections/ProjectGrid';
+import { ProjectMasonry } from '@/components/sections/ProjectMasonry';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { Reveal } from '@/components/ui/Reveal';
 import { projects } from '@/data/projects';
@@ -34,7 +34,7 @@ export function Projects() {
         </div>
       </section>
 
-      <ProjectGrid showHeading={false} />
+      <ProjectMasonry showHeading={false} />
       <CTABanner title="Want Results Like These?" description="Share your project details and we'll show you what's possible for your space." buttonText="Start Your Project" />
     </>
   );

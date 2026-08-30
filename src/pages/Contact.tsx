@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
+import BorderGlow from '@/components/ui/BorderGlow';
 import { formFieldClass } from '@/lib/mobile';
 
 export function Contact() {
@@ -64,10 +65,16 @@ export function Contact() {
             </Reveal>
 
             <Reveal delay={0.1} className="lg:col-span-3">
-              <motion.form
-                onSubmit={handleSubmit}
-                className="gradient-border rounded-3xl bg-beige-50 p-5 shadow-lg sm:p-10"
+              <BorderGlow
+                backgroundColor="#faf7f0"
+                glowColor="38 35 65"
+                colors={['#b8a88a', '#c9b896', '#ddd0b8']}
+                borderRadius={24}
+                glowRadius={28}
+                edgeSensitivity={30}
+                fillOpacity={0.35}
               >
+                <motion.form onSubmit={handleSubmit} className="p-5 sm:p-10">
                 <h3 className="font-display text-2xl font-medium text-graphite-800">Send Us a Message</h3>
                 <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2">
                   <div>
@@ -107,7 +114,8 @@ export function Contact() {
                     Thank you! We'll be in touch within 1 business day.
                   </motion.p>
                 )}
-              </motion.form>
+                </motion.form>
+              </BorderGlow>
             </Reveal>
           </div>
         </div>

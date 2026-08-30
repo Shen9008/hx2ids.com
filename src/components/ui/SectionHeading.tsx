@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import BlurText from '@/components/ui/BlurText';
 
 interface SectionHeadingProps {
   label: string;
@@ -19,14 +20,18 @@ export function SectionHeading({ label, title, description, align = 'left', dark
       >
         {label}
       </p>
-      <h2
+      <BlurText
+        as="h2"
+        text={title}
+        animateBy="words"
+        direction="top"
+        delay={120}
+        stepDuration={0.3}
         className={cn(
           'text-balance font-display text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl',
           dark ? 'text-beige-50' : 'text-graphite-800',
         )}
-      >
-        {title}
-      </h2>
+      />
       {description && (
         <p
           className={cn(

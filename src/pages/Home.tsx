@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import { Hero } from '@/components/sections/Hero';
+import { HomeHero } from '@/components/sections/HomeHero';
 import { Marquee } from '@/components/sections/Marquee';
 import { BentoServices } from '@/components/sections/BentoServices';
-import { ProjectGrid } from '@/components/sections/ProjectGrid';
+import { ProjectMasonry } from '@/components/sections/ProjectMasonry';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
+import BorderGlow from '@/components/ui/BorderGlow';
 import { ShaderBackground } from '@/components/ui/ShaderBackground';
 import { processSteps } from '@/data/projects';
 
@@ -20,10 +21,10 @@ const usps = [
 export function Home() {
   return (
     <>
-      <Hero />
+      <HomeHero />
       <Marquee />
 
-      <section className="bg-beige-200/40 py-16 sm:py-20 lg:py-28">
+      <section id="about" className="bg-beige-200/40 py-16 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
@@ -62,16 +63,27 @@ export function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {usps.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="gradient-border rounded-2xl bg-beige-50 p-8 text-center shadow-sm transition-shadow hover:shadow-lg"
+                <BorderGlow
+                  backgroundColor="#faf7f0"
+                  glowColor="38 35 65"
+                  colors={['#b8a88a', '#c9b896', '#ddd0b8']}
+                  borderRadius={16}
+                  glowRadius={24}
+                  edgeSensitivity={32}
+                  fillOpacity={0.35}
+                  className="h-full"
                 >
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-beige-400 text-beige-600">
-                    <CheckCircle2 size={20} />
-                  </div>
-                  <h3 className="font-display text-xl font-medium text-graphite-800">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-graphite-500">{item.desc}</p>
-                </motion.div>
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    className="p-8 text-center transition-shadow"
+                  >
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-beige-400 text-beige-600">
+                      <CheckCircle2 size={20} />
+                    </div>
+                    <h3 className="font-display text-xl font-medium text-graphite-800">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-graphite-500">{item.desc}</p>
+                  </motion.div>
+                </BorderGlow>
               </Reveal>
             ))}
           </div>
@@ -111,7 +123,7 @@ export function Home() {
         </div>
       </section>
 
-      <ProjectGrid />
+      <ProjectMasonry limit={12} />
       <CTABanner />
     </>
   );
