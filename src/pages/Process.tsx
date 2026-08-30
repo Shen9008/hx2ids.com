@@ -2,7 +2,7 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
-import { processSteps } from '@/data/projects';
+import { processSteps, projectImage } from '@/data/projects';
 
 const expectations = [
   { title: 'Regular Updates', desc: 'Progress photos and site reports so you always know where your project stands.' },
@@ -25,7 +25,7 @@ export function Process() {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="overflow-hidden rounded-2xl shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80"
+                src={projectImage('aster-villa-corner')}
                 alt="Interior design planning and visualization"
                 className="aspect-[21/9] w-full object-cover"
               />

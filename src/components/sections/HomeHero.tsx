@@ -1,5 +1,5 @@
 import { Hero3 } from '@/components/ui/hero-3';
-import { stats } from '@/data/projects';
+import { stats, projectImage } from '@/data/projects';
 
 const navItems = [
   { label: 'About', href: '/about' },
@@ -23,7 +23,7 @@ export function HomeHero() {
       primaryCtaHref="/contact"
       secondaryCtaText="View completed work"
       secondaryCtaHref="/projects"
-      backgroundImage="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85"
+      backgroundImage={projectImage('shorefront-residences')}
       stats={stats}
       scrollText="Scroll to explore"
       scrollHref="#about"

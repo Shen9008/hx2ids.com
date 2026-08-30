@@ -10,7 +10,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import BorderGlow from '@/components/ui/BorderGlow';
 import { ShaderBackground } from '@/components/ui/ShaderBackground';
-import { processSteps } from '@/data/projects';
+import { processSteps, projectImage } from '@/data/projects';
 
 const usps = [
   { title: 'Design to Build', desc: 'End-to-end from 3D visualization through construction and final handover.' },
@@ -40,7 +40,7 @@ export function Home() {
             <Reveal delay={0.15}>
               <motion.div className="overflow-hidden rounded-2xl shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80"
+                  src={projectImage('balik-pulau-bungalow')}
                   alt="Hx2 Design interior"
                   className="aspect-[4/5] w-full object-cover"
                 />

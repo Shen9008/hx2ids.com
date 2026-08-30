@@ -3,6 +3,7 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { CTABanner } from '@/components/sections/CTABanner';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
+import { projectImage } from '@/data/projects';
 
 const values = [
   { title: '150+ Projects Delivered', desc: 'From bespoke apartments to large-scale corporate offices across Penang, Selangor, Kedah, and Singapore.' },
@@ -33,7 +34,7 @@ export function About() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <motion.div className="overflow-hidden rounded-3xl shadow-xl">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Hx2 team" className="aspect-[4/5] w-full object-cover" />
+                <img src={projectImage('aster-villa-simpang')} alt="Aster Villa by Hx2 Design" className="aspect-[4/5] w-full object-cover" />
               </motion.div>
             </Reveal>
             <Reveal delay={0.1}>
@@ -62,7 +63,7 @@ export function About() {
             </Reveal>
             <Reveal delay={0.1}>
               <motion.div className="overflow-hidden rounded-3xl shadow-xl">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="Hx2 project" className="aspect-[4/5] w-full object-cover" />
+                <img src={projectImage('zen-6')} alt="Zen 6 interior by Hx2 Design" className="aspect-[4/5] w-full object-cover" />
               </motion.div>
             </Reveal>
           </div>
