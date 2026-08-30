@@ -136,15 +136,17 @@ export function Hero3({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <section className="dark bg-background text-foreground relative min-h-screen w-full overflow-hidden font-sans">
+    <section className="relative min-h-screen w-full overflow-hidden bg-graphite-900 font-sans text-beige-50">
       {backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img
             src={backgroundImage}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none h-full w-full object-cover brightness-40 select-none"
+            className="pointer-events-none h-full w-full object-cover brightness-[0.42] select-none"
           />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite-900/85 via-graphite-800/50 to-graphite-900/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite-900/95 via-graphite-900/20 to-graphite-800/45" />
         </div>
       )}
 
@@ -158,10 +160,10 @@ export function Hero3({
         <div className="flex max-w-full items-center justify-between px-6 py-6 sm:px-10 md:px-16 lg:px-20">
           <HeroLink
             href="/"
-            className="text-foreground flex items-center gap-2.5 font-display text-2xl font-light tracking-tight sm:text-xl"
+            className="flex items-center gap-2.5 font-display text-xl font-medium tracking-tight text-white sm:text-2xl"
           >
-            <span className="text-primary flex items-center justify-center">
-              {logo || <LogoIcon className="size-8 text-white" />}
+            <span className="flex items-center justify-center text-beige-200">
+              {logo || <LogoIcon className="size-8 text-beige-100" />}
             </span>
             <span>{logoText}</span>
           </HeroLink>
@@ -171,11 +173,11 @@ export function Hero3({
               <HeroLink
                 key={navItem.label}
                 href={navItem.href}
-                className="group text-muted-foreground hover:text-foreground flex items-center gap-1.5 text-sm font-medium transition-colors duration-200"
+                className="group flex items-center gap-1.5 text-sm font-medium text-beige-100/90 transition-colors duration-200 hover:text-white"
               >
                 <span>{navItem.label}</span>
                 {navItem.hasDropdown && (
-                  <FaChevronDown className="text-muted-foreground h-3 w-3 fill-current transition-transform duration-200 group-hover:translate-y-0.5" />
+                  <FaChevronDown className="h-3 w-3 fill-current text-beige-200/70 transition-transform duration-200 group-hover:translate-y-0.5" />
                 )}
               </HeroLink>
             ))}
@@ -184,7 +186,7 @@ export function Hero3({
           <div className="hidden md:block">
             <HeroLink
               href={signInHref}
-              className="border-border/80 bg-background/20 text-foreground hover:bg-accent hover:text-accent-foreground rounded-full border px-6 py-2 text-sm font-medium backdrop-blur-sm transition-all duration-200"
+              className="rounded-full border border-white/30 bg-white/10 px-6 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-white/20"
             >
               {signInText}
             </HeroLink>
@@ -192,7 +194,7 @@ export function Hero3({
 
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="text-foreground hover:bg-accent flex items-center justify-center rounded-full p-2 transition-colors md:hidden"
+            className="flex items-center justify-center rounded-full p-2 text-white transition-colors hover:bg-white/10 md:hidden"
             aria-label="Toggle navigation menu"
           >
             <FaBars className="h-5 w-5 fill-current" />
@@ -207,22 +209,22 @@ export function Hero3({
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
             transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-            className="bg-background/95 fixed inset-0 z-50 flex flex-col p-6 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-graphite-900/95 p-6 backdrop-blur-md md:hidden"
           >
           <div className="flex items-center justify-between">
             <HeroLink
               href="/"
-              className="text-foreground flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
+              className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span className="text-primary flex items-center justify-center">
-                {logo || <LogoIcon className="size-8 fill-current" />}
+              <span className="flex items-center justify-center text-beige-200">
+                {logo || <LogoIcon className="size-8 text-beige-100" />}
               </span>
               <span>{logoText}</span>
             </HeroLink>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground hover:bg-accent flex items-center justify-center rounded-full p-2 transition-colors"
+              className="flex items-center justify-center rounded-full p-2 text-white transition-colors hover:bg-white/10"
               aria-label="Close menu"
             >
               <FaXmark className="h-5 w-5 fill-current" />
@@ -234,12 +236,12 @@ export function Hero3({
               <HeroLink
                 key={navItem.label}
                 href={navItem.href}
-                className="border-border/40 text-foreground hover:text-primary flex items-center justify-between border-b pb-3 text-lg font-medium transition-colors"
+                className="flex items-center justify-between border-b border-white/15 pb-3 text-lg font-medium text-beige-50 transition-colors hover:text-beige-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span>{navItem.label}</span>
                 {navItem.hasDropdown && (
-                  <FaChevronDown className="text-muted-foreground h-4 w-4 fill-current" />
+                  <FaChevronDown className="h-4 w-4 fill-current text-beige-200/70" />
                 )}
               </HeroLink>
             ))}
@@ -249,7 +251,7 @@ export function Hero3({
             <HeroLink
               href={signInHref}
               onClick={() => setMobileMenuOpen(false)}
-              className="border-border bg-background text-foreground hover:bg-accent flex w-full items-center justify-center rounded-full border py-3 text-base font-medium transition-colors"
+              className="flex w-full items-center justify-center rounded-full border border-white/25 bg-white/10 py-3 text-base font-medium text-white transition-colors hover:bg-white/20"
             >
               {signInText}
             </HeroLink>
@@ -270,7 +272,7 @@ export function Hero3({
             {tagline && (
               <motion.p
                 variants={item}
-                className="sm:text-md mb-4 font-light tracking-wide text-white/90"
+                className="mb-4 text-sm font-medium tracking-wide text-beige-200 sm:text-base"
               >
                 {tagline}
               </motion.p>
@@ -278,16 +280,16 @@ export function Hero3({
 
             <motion.h1
               variants={item}
-              className="text-foreground mb-6 font-display text-4xl font-light tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mb-6 font-display text-4xl font-medium tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl md:text-6xl lg:text-7xl"
             >
               {titleLine1 && <span className="block">{titleLine1}</span>}
-              {titleLine2 && <span className="block">{titleLine2}</span>}
+              {titleLine2 && <span className="block text-beige-200">{titleLine2}</span>}
             </motion.h1>
 
             {description && (
               <motion.p
                 variants={item}
-                className="sm:text-md md:text-md leading-wide mb-4 max-w-2xl text-base text-zinc-300"
+                className="mb-4 max-w-2xl text-base leading-relaxed text-beige-100/95 sm:text-lg"
               >
                 {description}
               </motion.p>
@@ -308,7 +310,7 @@ export function Hero3({
               {secondaryCtaText && (
                 <HeroLink
                   href={secondaryCtaHref}
-                  className="group inline-flex items-center gap-2 text-sm font-light text-zinc-100 transition-colors duration-200 hover:text-zinc-300 sm:text-base"
+                  className="group inline-flex items-center gap-2 text-sm font-medium text-beige-50 transition-colors duration-200 hover:text-white sm:text-base"
                 >
                   <span>{secondaryCtaText}</span>
                   <FaArrowRight className="h-4 w-4 fill-current transition-transform duration-200 group-hover:translate-x-1" />
@@ -323,22 +325,22 @@ export function Hero3({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.6 }}
-          className="border-border/20 mt-12 border-t pt-8 sm:mt-16"
+          className="mt-12 border-t border-white/20 pt-8 sm:mt-16"
         >
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
             {stats.length > 0 && (
-              <div className="flex flex-col divide-y divide-white/50 md:flex-row md:items-center md:divide-x md:divide-y-0">
+              <div className="flex flex-col divide-y divide-white/20 md:flex-row md:items-center md:divide-x md:divide-y-0">
                 {stats.map((stat) => (
                   <motion.div
                     variants={item}
                     key={stat.label}
                     className="flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0 md:px-6 md:py-0 md:first:pl-0 md:last:pr-0"
                   >
-                    <span className="text-foreground font-display text-3xl font-light tracking-tight sm:text-4xl">
+                    <span className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
                       {stat.value}
                     </span>
 
-                    <span className="text-xs text-zinc-300 sm:text-sm">
+                    <span className="text-xs font-medium text-beige-200/90 sm:text-sm">
                       {stat.label}
                     </span>
                   </motion.div>
@@ -350,7 +352,7 @@ export function Hero3({
               <motion.a
                 variants={item}
                 href={scrollHref}
-                className="text-muted-foreground/80 hover:text-foreground flex items-center gap-2 self-start text-xs font-semibold transition-colors sm:text-sm md:self-auto"
+                className="flex items-center gap-2 self-start text-xs font-semibold text-beige-200 transition-colors hover:text-white sm:text-sm md:self-auto"
               >
                 <span>{scrollText}</span>
                 <FaArrowDown className="h-4 w-4 fill-current" />
