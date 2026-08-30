@@ -4,6 +4,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { ShaderBackground } from '@/components/ui/ShaderBackground';
 import BorderGlow from '@/components/ui/BorderGlow';
+import FoldText from '@/components/ui/FoldText';
 
 interface CTABannerProps {
   title?: string;
@@ -34,7 +35,19 @@ export function CTABanner({
               <ShaderBackground variant="dark" opacity={1} />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(184,168,138,0.12),transparent_60%)]" />
               <div className="relative">
-                <h2 className="font-display text-2xl font-medium text-beige-50 sm:text-4xl">{title}</h2>
+                <h2 className="font-display tracking-tight">
+                  <FoldText
+                    text={title}
+                    splitBy="word"
+                    hinge="top"
+                    trigger="scroll"
+                    duration={0.55}
+                    stagger={0.035}
+                    fontSize="clamp(1.5rem, 4vw, 2.25rem)"
+                    fontWeight={500}
+                    color="#faf7f0"
+                  />
+                </h2>
                 <p className="text-pretty mx-auto mt-4 max-w-md text-base text-beige-200/90 sm:text-lg">{description}</p>
                 <Button to="/contact" variant="secondary" size="lg" className="mt-8 w-full sm:w-auto">
                   {buttonText} <ArrowRight size={16} />

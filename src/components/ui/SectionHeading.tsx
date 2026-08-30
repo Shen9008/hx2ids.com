@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import BlurText from '@/components/ui/BlurText';
+import FoldText from '@/components/ui/FoldText';
 
 interface SectionHeadingProps {
   label: string;
@@ -20,18 +20,19 @@ export function SectionHeading({ label, title, description, align = 'left', dark
       >
         {label}
       </p>
-      <BlurText
-        as="h2"
-        text={title}
-        animateBy="words"
-        direction="top"
-        delay={120}
-        stepDuration={0.3}
-        className={cn(
-          'text-balance font-display text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl',
-          dark ? 'text-beige-50' : 'text-graphite-800',
-        )}
-      />
+      <h2 className="text-balance font-display tracking-tight">
+        <FoldText
+          text={title}
+          splitBy="word"
+          hinge="top"
+          trigger="scroll"
+          duration={0.55}
+          stagger={0.04}
+          fontSize="clamp(1.875rem, 4vw, 3rem)"
+          fontWeight={500}
+          color={dark ? '#faf7f0' : '#1a1a1a'}
+        />
+      </h2>
       {description && (
         <p
           className={cn(

@@ -9,6 +9,7 @@ import {
   FaXmark,
 } from 'react-icons/fa6';
 import LogoIcon from '@/assets/logo-icon';
+import FoldText from '@/components/ui/FoldText';
 
 export interface Hero3NavItem {
   label: string;
@@ -278,13 +279,38 @@ export function Hero3({
               </motion.p>
             )}
 
-            <motion.h1
-              variants={item}
-              className="mb-6 font-display text-4xl font-medium tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl md:text-6xl lg:text-7xl"
-            >
-              {titleLine1 && <span className="block">{titleLine1}</span>}
-              {titleLine2 && <span className="block text-beige-200">{titleLine2}</span>}
-            </motion.h1>
+            <h1 className="mb-6 font-display tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
+              {titleLine1 && (
+                <span className="block">
+                  <FoldText
+                    text={titleLine1}
+                    splitBy="word"
+                    hinge="top"
+                    trigger="mount"
+                    duration={0.65}
+                    stagger={0.045}
+                    fontSize="clamp(2.25rem, 5vw, 4.5rem)"
+                    fontWeight={500}
+                    color="#ffffff"
+                  />
+                </span>
+              )}
+              {titleLine2 && (
+                <span className="block">
+                  <FoldText
+                    text={titleLine2}
+                    splitBy="word"
+                    hinge="top"
+                    trigger="mount"
+                    duration={0.65}
+                    stagger={0.04}
+                    fontSize="clamp(2.25rem, 5vw, 4.5rem)"
+                    fontWeight={500}
+                    color="#ebe3d4"
+                  />
+                </span>
+              )}
+            </h1>
 
             {description && (
               <motion.p
